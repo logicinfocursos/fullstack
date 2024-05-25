@@ -1,72 +1,9 @@
 // src\models\repositories\base.repository.js
-//import db from '../../../db/db.json'
+import db from '../../../db/db.json' assert { type: 'json' };
+/*
+a partir do Node.js v12.20.0, v14.13.0 e v16.0.0, onde o suporte para módulos ES foi estabilizado. Agora, ao importar arquivos JSON em um módulo ES, você precisa incluir a afirmação de importação { type: 'json' }.
+*/
 
-const db={
-    "product": [
-        {
-            "id": 1,
-            "name": "Produto 1",
-            "price": 100,
-            "categoryid": 1
-        },
-        {
-            "id": 2,
-            "name": "Produto 2",
-            "price": 200,
-            "categoryid": 2
-        },
-        {
-            "id": 3,
-            "name": "Produto 3",
-            "price": 300,
-            "categoryid": 3
-        },
-        {
-            "id": 4,
-            "name": "Produto 4",
-            "price": 400,
-            "categoryid": 4
-        },
-        {
-            "id": 5,
-            "name": "Produto 5",
-            "price": 500,
-            "categoryid": 6 
-        },
-        {
-            "id": 6,
-            "name": "Produto 6",
-            "price": 600,
-            "categoryid": 1
-        }
-    ],
-    "category": [
-        {
-            "id": 1,
-            "name": "Categoria 1"
-        },
-        {
-            "id": 2,
-            "name": "Categoria 2"
-        },
-        {
-            "id": 3,
-            "name": "Categoria 3"
-        },  
-        {
-            "id": 4,
-            "name": "Categoria 4"
-        },
-        {
-            "id": 5,
-            "name": "Categoria 5"
-        },
-        {
-            "id": 6,
-            "name": "Categoria 6"
-        }
-    ]
-}
 
 export class BaseRepository {    
 
