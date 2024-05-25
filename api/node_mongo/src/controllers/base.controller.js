@@ -6,6 +6,7 @@ export class BaseController {
     }
 
     async getAll(_, response) {
+
         try {
             const result = await this.repository.getAll()
             const objectList = result.map(object => this.repository.mapObject(object))
@@ -19,7 +20,7 @@ export class BaseController {
 
     async getById(request, response) {
         try {
-            const result = await this.repository.getById(request.params.id)
+            const result = await this.repository.getById(parseInt(request.params.id))
             const mappedObject = this.repository.mapObject(result)
 
             response.status(200).send(mappedObject)
@@ -34,10 +35,10 @@ export class BaseController {
     }
 
     async update(request, response) {
-        response.status(200).send(await this.repository.update(request.params.id, request.body))
+        response.status(200).send(await this.repository.update(parseInt(request.params.id), request.body))
     }
 
     async erase(request, response) {
-        response.status(200).send(await this.repository.erase(request.params.id))
+        response.status(200).send(await this.repository.erase(parseInt(request.params.id)))
     }
 }

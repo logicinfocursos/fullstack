@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 
-import { Router } from './src/routes/router.js'
+import { Router } from './routes/router.js'
 
 const app = express()
 

@@ -4,6 +4,7 @@ import { ProductController } from '../controllers/product.controller.js'
 
 export class ProductRoute extends BaseRoute {
     constructor(app) {
+       
         super(new ProductController(), app)
     }
 }

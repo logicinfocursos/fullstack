@@ -1,42 +1,52 @@
 // src\models\repositories\base.repository.js
-import db from '../../../db/db.json' assert { type: 'json' };
-/*
-a partir do Node.js v12.20.0, v14.13.0 e v16.0.0, onde o suporte para módulos ES foi estabilizado. Agora, ao importar arquivos JSON em um módulo ES, você precisa incluir a afirmação de importação { type: 'json' }.
-*/
 
-
+import { prisma } from '../../services/prisma.js'
 export class BaseRepository {    
 
     constructor(entity) {
-        this.entity = entity
-        this.db = db
+        this.entity = entity        
     }
 
     async getAll() {
-        return this.db[this.entity]
+        const result = await prisma[this.entity].findMany({})
+
+        return result
     }
 
     async getById(id) {
-        return this.db[this.entity].find((object) => object.id === Number(id))
+
+        console.log("BaseRepository -> getById -> id", id, this.entity)
+        const result = await prisma[this.entity].findUnique({
+            where: { id }
+        })
+
+        return result
     }
 
     async create(data) {
-        data.id = this.db[this.entity].length + 1
-        this.db[this.entity].push(data)
+        const result = await prisma[this.entity].create({
+            data
+        })
 
-        return data
+        return result
     }
 
     async update(id, data) {
-        const index = this.db[this.entity].findIndex((object) => object.id === id)
-        this.db[this.entity][index] = data
-        return this.db[this.entity][index]
+        const result = await prisma[this.entity].update({
+            where: { id },
+            data
+        })
+
+        return result
     }
 
     async erase(id) {
-        const index = this.db[this.entity].findIndex((object) => object.id === id)
-        this.db[this.entity].splice(index, 1)
-        return this.db[this.entity]
+
+        const result = await prisma[this.entity].delete({
+            where:  {id}
+        })
+
+        return result
     }
 
     mapObject(object) {
